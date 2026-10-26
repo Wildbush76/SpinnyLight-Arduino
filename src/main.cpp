@@ -7,7 +7,7 @@
 
 #define SERVICE_UUID "2d60fead-9a7c-42b7-8878-41518bfec0a6"
 #define CHARACTERISTIC_UUID_RX "63e613d6-3d8e-4d62-8ee8-82fe2baae72a"
-#define MOTOR_PIN 1
+#define MOTOR_PIN 20
 
 const long LIGHT_RUN_TIME = 1000 * 10; // milliseconds
 bool trigger_light = false;
