@@ -7,7 +7,7 @@
 
 #define SERVICE_UUID "2d60fead-9a7c-42b7-8878-41518bfec0a6"
 #define CHARACTERISTIC_UUID_RX "63e613d6-3d8e-4d62-8ee8-82fe2baae72a"
-#define MOTOR_PIN 20
+#define LIGHT_PIN 20
 
 const long LIGHT_RUN_TIME = 1000 * 10; // milliseconds
 bool trigger_light = false;
@@ -18,6 +18,7 @@ class MyCharacteristicCallbacks : public BLECharacteristicCallbacks
   {
     uint8_t *rxValue = pCharacteristic->getData();
     trigger_light = (bool)(*rxValue & 0x01);
+    Serial.println("Triggering Light!");
   }
 };
 
@@ -40,7 +41,7 @@ class BLECallbacks : public BLEServerCallbacks
 void setup()
 {
   Serial.begin(9600);
-  pinMode(MOTOR_PIN, OUTPUT);
+  pinMode(LIGHT_PIN, OUTPUT);
 
   BLEDevice::init("Spinny Light");
 
@@ -64,11 +65,11 @@ void loop()
   if (trigger_light)
   {
     trigger_light = false;
-    digitalWrite(MOTOR_PIN, LOW);
+    digitalWrite(LIGHT_PIN, HIGH);
     delay(LIGHT_RUN_TIME);
   }
   else
   {
-    digitalWrite(MOTOR_PIN, LOW);
+    digitalWrite(LIGHT_PIN, LOW);
   }
 }
